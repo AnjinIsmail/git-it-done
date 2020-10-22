@@ -5,11 +5,21 @@ var getUserRepos = function (user) {
   //format the github api url
   var apiUrl = "https://api.github.com/users/" + user + "/repos";
   //make a request to the url
-  fetch(apiUrl).then(function (response) {
-    response.json().then(function (data) {
-      displayRepos(data, user);
+  fetch(apiUrl)
+    .then(function (response) {
+      //request was successful
+      if (response.ok) {
+        response.json().then(function (data) {
+          displayRepos(data, user);
+        });
+      } else {
+        alert("error: " + response.statusText);
+      }
+    })
+    .catch(function (error) {
+      //notice this '.catch() getting chained onto the end of the '.then()' method
+      alert("Unable to connnect to GitHub");
     });
-  });
 };
 
 var userFormEl = document.querySelector("#user-form");
@@ -72,21 +82,3 @@ var displayRepos = function (repos, searchTerm) {
     repoContainerEl.appendChild(repoEl);
   }
 };
-
-fetch(apiUrl)
-.then(function(response){
-  //request was successful
-  if (response.ok) {
-    response.json().then(function(data){
-      displayRepos(data, user);
-    });
-  } else {
-    alert("error: " + response.statusText);
-  }
-})
-.catch(function(error) {
-  //notice this '.catch() getting chained onto the end of the '.then()' method
-  alert("Unablet o connnect to GitHub");
-});
-
-
