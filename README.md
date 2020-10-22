@@ -20,3 +20,9 @@ Below is the list of desired actions-
   - users can click on a language button to see a list of featured repos will look exactly like the list of user repos.  
 
 Deployed application https://anjinismail.github.io/git-it-done/
+
+Screenshots
+<img src="https://github.com/AnjinIsmail/git-it-done/blob/main/assets/screenshots/1.png?raw=true">
+<img src="https://github.com/AnjinIsmail/git-it-done/blob/main/assets/screenshots/2.png?raw=true">
+<img src="https://github.com/AnjinIsmail/git-it-done/blob/main/assets/screenshots/3.png?raw=true">
+<img src="https://github.com/AnjinIsmail/git-it-done/blob/main/assets/screenshots/4.png?raw=true">
