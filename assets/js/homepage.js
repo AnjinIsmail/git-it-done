@@ -1,5 +1,6 @@
 var repoContainerEl = document.querySelector("#repos-container");
 var repoSearchTerm = document.querySelector("#repo-search-term");
+var languageButtonsEl= document.querySelector("#language-buttons");
 
 var getUserRepos = function (user) {
   //format the github api url
@@ -83,3 +84,30 @@ var displayRepos = function (repos, searchTerm) {
     repoContainerEl.appendChild(repoEl);
   }
 };
+
+var getFeaturedRepos = function (language) {
+  var apiUrl = "https://api.github.com/search/repositories?q=" + language + "+is:featured&sort=help-wanted-issues";
+  fetch(apiUrl).then(function (response) {
+    if (response.ok) {
+      //we need to use a method to extract the json from the response, to parse the response and log the data to the console.
+      response.json().then(function(data){
+      //but now we can dispaly it instead of console.log it 
+        displayRepos(data.items, language)  
+       });
+    } else {
+      alert("Error: " + response.statusText);
+    }
+  });
+}
+
+var buttonClickHandler= function(event){
+  var language = event.target.getAttribute("data-language")
+  if(language) {
+    getFeaturedRepos(language);
+
+    //clear old content
+    repoContainerEl.textContent = "";
+  }
+  console.log(language)
+}
+languageButtonsEl.addEventListener("click", buttonClickHandler);
